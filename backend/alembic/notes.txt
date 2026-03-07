@@ -1,0 +1,13 @@
+===========PG config
+username: postgres
+pass: postgres123
+
+===========Run BE
+cd D:\Projects\ai-phuong-xa\backend
+.\venv\Scripts\Activate.ps1
+uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+
+Nhớ quy tắc: mỗi lần mở terminal mới đều phải cd backend + activate venv trước khi chạy bất kỳ lệnh nào!
+
+========== Activate venv
+.\venv\Scripts\Activate.ps1

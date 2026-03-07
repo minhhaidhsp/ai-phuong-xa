@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Environment — QUAN TRỌNG: KHÔNG BAO GIỜ commit .env
+.env
+.env.local
+.env.production
+
+# Database cache
+*.pkl
+*.db
+*.sqlite3
+
+# Qdrant local storage
+qdrant_storage/
+
+# Ollama (nếu lưu local)
+*.gguf
+*.bin
+
+# VS Code
+.vscode/settings.json
+.vscode/launch.json
+
+# Next.js
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/

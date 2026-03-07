@@ -1,0 +1,51 @@
+# ═══ Web Framework ═══
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+
+# ═══ Database ═══
+sqlalchemy[asyncio]==2.0.36
+asyncpg==0.29.0
+alembic==1.13.3
+psycopg2-binary==2.9.9
+
+# ═══ Security ═══
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.2.0
+
+# ═══ AI / RAG ═══
+langchain==0.3.7
+langchain-community==0.3.7
+langchain-core==0.3.15
+langgraph==0.2.38
+qdrant-client==1.11.3
+rank-bm25==0.2.2
+underthesea==6.8.4
+
+# ═══ Document Processing ═══
+pymupdf==1.24.11
+python-docx==1.1.2
+docxtpl==0.19.0
+openpyxl==3.1.5
+EasyOCR==1.7.2
+
+# ═══ Utilities ═══
+python-dotenv==1.0.1
+pydantic==2.9.2
+pydantic-settings==2.5.2
+httpx==0.27.2
+tqdm==4.66.5
+loguru==0.7.2
+
+# ═══ Task Queue (thêm sau khi logic ổn) ═══
+# celery==5.4.0
+# redis==5.1.1
+
+# ═══ Evaluation ═══
+ragas==0.2.3
+
+# ═══ Dev / Test ═══
+pytest==8.3.3
+pytest-asyncio==0.24.0
+httpx==0.27.2
