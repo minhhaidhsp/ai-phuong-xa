@@ -48,3 +48,16 @@ logs/
 .coverage
 htmlcov/
 .pytest_cache/
+# Output files generated
+data/output/
+output_*.docx
+
+# Environment
+.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/

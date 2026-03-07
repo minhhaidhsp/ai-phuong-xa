@@ -1,4 +1,4 @@
-# backend/src/db/models.py
+﻿# backend/src/db/models.py
 import uuid
 from datetime import datetime
 from typing import Optional
@@ -15,10 +15,10 @@ def gen_uuid():
     return str(uuid.uuid4())
 
 
-# ══════════════════════════════════════════
-# ENUM-like constants (dùng String thay ENUM
-# để dễ migrate sau này)
-# ══════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# ENUM-like constants (dÃ¹ng String thay ENUM
+# Ä‘á»ƒ dá»… migrate sau nÃ y)
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class VaiTro:
     CAN_BO    = "can_bo"
@@ -39,9 +39,9 @@ class NguonTiepNhan:
     ONLINE     = "ONLINE"
 
 
-# ══════════════════════════════════════════
-# BẢNG: nguoi_dung
-# ══════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# Báº¢NG: nguoi_dung
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class NguoiDung(Base):
     __tablename__ = "nguoi_dung"
 
@@ -72,9 +72,9 @@ class NguoiDung(Base):
     nhat_ky: Mapped[list["NhatKyHeThong"]] = relationship(back_populates="nguoi_dung")
 
 
-# ══════════════════════════════════════════
-# BẢNG: thu_tuc_hanh_chinh
-# ══════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# Báº¢NG: thu_tuc_hanh_chinh
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class ThuTucHanhChinh(Base):
     __tablename__ = "thu_tuc_hanh_chinh"
 
@@ -95,9 +95,9 @@ class ThuTucHanhChinh(Base):
     ho_so: Mapped[list["HoSo"]] = relationship(back_populates="thu_tuc")
 
 
-# ══════════════════════════════════════════
-# BẢNG: ho_so (cốt lõi)
-# ══════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# Báº¢NG: ho_so (cá»‘t lÃµi)
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class HoSo(Base):
     __tablename__ = "ho_so"
 
@@ -112,7 +112,7 @@ class HoSo(Base):
         UUID(as_uuid=False), ForeignKey("nguoi_dung.id"), index=True
     )
 
-    # Thông tin công dân
+    # ThÃ´ng tin cÃ´ng dÃ¢n
     cong_dan_ho_ten: Mapped[str] = mapped_column(String(150), nullable=False)
     cong_dan_cccd: Mapped[str] = mapped_column(String(20), nullable=False)
     cong_dan_ngay_sinh: Mapped[Optional[datetime]] = mapped_column(Date)
@@ -120,7 +120,7 @@ class HoSo(Base):
     cong_dan_email: Mapped[Optional[str]] = mapped_column(String(150))
     cong_dan_dia_chi: Mapped[Optional[str]] = mapped_column(Text)
 
-    # Trạng thái & tiến độ
+    # Tráº¡ng thÃ¡i & tiáº¿n Ä‘á»™
     trang_thai: Mapped[str] = mapped_column(
         String(30), nullable=False,
         default=TrangThaiHoSo.CHO_TIEP_NHAN, index=True
@@ -141,7 +141,7 @@ class HoSo(Base):
     ai_van_ban_path: Mapped[Optional[str]] = mapped_column(String(500))
     ai_confidence: Mapped[Optional[float]] = mapped_column(Float)
 
-    # Nội bộ
+    # Ná»™i bá»™
     ghi_chu_noi_bo: Mapped[Optional[str]] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
@@ -156,9 +156,9 @@ class HoSo(Base):
     can_bo_thu_ly: Mapped[Optional["NguoiDung"]] = relationship(back_populates="ho_so_phu_trach")
 
 
-# ══════════════════════════════════════════
-# BẢNG: nhat_ky_he_thong (Audit Log)
-# ══════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# Báº¢NG: nhat_ky_he_thong (Audit Log)
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class NhatKyHeThong(Base):
     __tablename__ = "nhat_ky_he_thong"
 
@@ -179,3 +179,21 @@ class NhatKyHeThong(Base):
 
     # Relationships
     nguoi_dung: Mapped[Optional["NguoiDung"]] = relationship(back_populates="nhat_ky")
+    
+
+
+
+class MauVanBan(Base):
+    __tablename__ = "mau_van_ban"
+
+    id:           Mapped[uuid.UUID]        = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    ma_mau:       Mapped[str]              = mapped_column(String(30), unique=True, nullable=False, index=True)
+    ten_mau:      Mapped[str]              = mapped_column(String(200), nullable=False)
+    loai_van_ban: Mapped[str]              = mapped_column(String(50), nullable=False)
+    linh_vuc:     Mapped[Optional[str]]    = mapped_column(String(50))
+    file_path:    Mapped[Optional[str]]    = mapped_column(String(500))
+    placeholders: Mapped[Optional[dict]]   = mapped_column(JSONB)
+    huong_dan:    Mapped[Optional[str]]    = mapped_column(Text)
+    is_active:    Mapped[bool]             = mapped_column(Boolean, default=True, nullable=False)
+    created_at:   Mapped[datetime]         = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at:   Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), onupdate=func.now())

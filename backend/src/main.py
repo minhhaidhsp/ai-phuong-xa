@@ -7,6 +7,7 @@ from src.core.config import get_settings
 from src.api.auth import router as auth_router
 from src.api.ho_so import router as ho_so_router
 from src.api.rag import router as rag_router
+from src.api.agents import router as agents_router
 from src.rag.vector_store import init_collection
 
 settings = get_settings()
@@ -41,6 +42,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(ho_so_router)
 app.include_router(rag_router)
+app.include_router(agents_router)
 
 
 @app.get("/health")
