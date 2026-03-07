@@ -11,3 +11,18 @@ Nhớ quy tắc: mỗi lần mở terminal mới đều phải cd backend + acti
 
 ========== Activate venv
 .\venv\Scripts\Activate.ps1
+
+
+======git config
+
+git remote add origin https://github.com/minhhaidhsp/ai-phuong-xa.git
+git config --global user.email "minhhaidhsp@gmail.com"
+git config --global user.name "NM Hai"
+
+=====push code
+git add .
+git commit -m "feat: Sprint 2 — JWT auth, RBAC, seed users"
+git push -u origin main
+
+====run seed
+python seed.py

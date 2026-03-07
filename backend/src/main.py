@@ -7,6 +7,7 @@ from loguru import logger
 
 from src.core.config import get_settings
 from src.api.auth import router as auth_router
+from src.api.ho_so import router as ho_so_router  # ← Sprint 3
 
 settings = get_settings()
 
@@ -28,10 +29,10 @@ app.add_middleware(
 )
 
 # ── Đăng ký Routers ───────────────────────────────────────────────────
-app.include_router(auth_router)   # /api/v1/auth/*
+app.include_router(auth_router)    # /api/v1/auth/*
+app.include_router(ho_so_router)   # /api/v1/ho-so/*  ← Sprint 3
 
-# Sprint 3+ sẽ thêm dần:
-# app.include_router(ho_so_router)
+# Sprint 4+ sẽ thêm dần:
 # app.include_router(rag_router)
 # app.include_router(agent_router)
 
