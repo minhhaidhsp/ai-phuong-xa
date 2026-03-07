@@ -16,6 +16,7 @@ from src.db.database import get_db
 from src.db.models import NguoiDung, VaiTro
 from src.db.repositories.user_repo import get_user_by_id
 from src.core.security import decode_token
+from typing import List
 
 # Tự động đọc "Bearer <token>" từ header Authorization
 # tokenUrl dùng cho nút Authorize trên Swagger UI
@@ -95,3 +96,15 @@ async def require_admin(
             detail="Chỉ Quản trị viên mới có quyền này"
         )
     return current_user
+
+
+
+def require_role(roles: List[str]):
+    async def _check(current_user: NguoiDung = Depends(get_current_user)):
+        if current_user.vai_tro not in roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Chức năng này yêu cầu vai trò: {', '.join(roles)}"
+            )
+        return current_user
+    return _check
