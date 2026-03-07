@@ -10,6 +10,7 @@ from src.api.rag import router as rag_router
 from src.api.agents import router as agents_router
 from src.rag.vector_store import init_collection
 from src.api.report import router as report_router
+from src.api.nhiem_vu import router as nhiem_vu_router
 
 settings = get_settings()
 
@@ -45,6 +46,7 @@ app.include_router(ho_so_router)
 app.include_router(rag_router)
 app.include_router(agents_router)
 app.include_router(report_router)
+app.include_router(nhiem_vu_router)
 
 
 @app.get("/health")

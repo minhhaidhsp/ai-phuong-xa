@@ -1,6 +1,6 @@
 ﻿# backend/src/db/models.py
 import uuid
-from datetime import datetime
+from datetime import datetime, date
 from typing import Optional
 from sqlalchemy import (
     String, Boolean, Text, Integer, Float,
@@ -197,3 +197,64 @@ class MauVanBan(Base):
     is_active:    Mapped[bool]             = mapped_column(Boolean, default=True, nullable=False)
     created_at:   Mapped[datetime]         = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at:   Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), onupdate=func.now())
+
+class NhiemVu(Base):
+    """
+    Bảng nhiệm vụ — lãnh đạo giao việc cho cán bộ.
+    Ngoài hồ sơ hành chính (có thể là họp, báo cáo, kiểm tra...)
+    """
+    __tablename__ = "nhiem_vu"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        primary_key=True, default=uuid.uuid4
+    )
+    tieu_de: Mapped[str] = mapped_column(String(200), nullable=False)
+    mo_ta: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Phân công
+    nguoi_giao_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("nguoi_dung.id"), nullable=False, index=True
+    )
+    nguoi_nhan_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("nguoi_dung.id"), nullable=False, index=True
+    )
+
+    # Thời hạn
+    ngay_giao: Mapped[date] = mapped_column(Date, nullable=False)
+    han_hoan_thanh: Mapped[date] = mapped_column(Date, nullable=False)
+    ngay_hoan_thanh_thuc_te: Mapped[Optional[date]] = mapped_column(
+        Date, nullable=True
+    )
+
+    # Trạng thái & ưu tiên
+    trang_thai: Mapped[str] = mapped_column(
+        String(30), nullable=False,
+        default="CHUA_BAT_DAU", index=True
+    )
+    muc_do_uu_tien: Mapped[str] = mapped_column(
+        String(20), nullable=False, default="TRUNG_BINH"
+    )
+
+    # Liên kết hồ sơ (tùy chọn — nhiệm vụ có thể gắn với hồ sơ)
+    ho_so_id: Mapped[Optional[uuid.UUID]] = mapped_column(
+        ForeignKey("ho_so.id"), nullable=True
+    )
+
+    # Ghi chú kết quả
+    ket_qua: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Timestamps
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+    updated_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime(timezone=True), onupdate=func.now(), nullable=True
+    )
+
+    # Relationships
+    nguoi_giao: Mapped["NguoiDung"] = relationship(
+        "NguoiDung", foreign_keys=[nguoi_giao_id], lazy="select"
+    )
+    nguoi_nhan: Mapped["NguoiDung"] = relationship(
+        "NguoiDung", foreign_keys=[nguoi_nhan_id], lazy="select"
+    )
