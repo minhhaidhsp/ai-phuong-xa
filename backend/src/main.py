@@ -1,15 +1,25 @@
-# src/main.py
-# Entrypoint FastAPI — đăng ký middleware và routers
-
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
 from src.core.config import get_settings
 from src.api.auth import router as auth_router
-from src.api.ho_so import router as ho_so_router  # ← Sprint 3
+from src.api.ho_so import router as ho_so_router
+from src.api.rag import router as rag_router
+from src.rag.vector_store import init_collection
 
 settings = get_settings()
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("🚀 Khởi động AI Phường Xã...")
+    await init_collection()
+    logger.info("✅ Qdrant collection sẵn sàng")
+    yield
+    logger.info("👋 Tắt server")
+
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -17,34 +27,22 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
-# CORS: cho phép Next.js frontend gọi API từ domain khác
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[settings.FRONTEND_URL, "http://localhost:3000"],
-    allow_credentials=True,  # Cho phép gửi Authorization header
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ── Đăng ký Routers ───────────────────────────────────────────────────
-app.include_router(auth_router)    # /api/v1/auth/*
-app.include_router(ho_so_router)   # /api/v1/ho-so/*  ← Sprint 3
-
-# Sprint 4+ sẽ thêm dần:
-# app.include_router(rag_router)
-# app.include_router(agent_router)
+app.include_router(auth_router)
+app.include_router(ho_so_router)
+app.include_router(rag_router)
 
 
-@app.get("/", tags=["⚙️ System"])
-async def root():
-    return {"app": settings.APP_NAME, "env": settings.APP_ENV, "docs": "/docs"}
-
-
-@app.get("/health", tags=["⚙️ System"])
-async def health_check():
-    return {"status": "ok"}
-
-
-logger.info(f"🚀 {settings.APP_NAME} started — ENV: {settings.APP_ENV}")
+@app.get("/health")
+async def health():
+    return {"status": "ok", "app": settings.APP_NAME}

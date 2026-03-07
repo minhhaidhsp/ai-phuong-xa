@@ -26,3 +26,10 @@ git push -u origin main
 
 ====run seed
 python seed.py
+
+====Rub  qdrant
+cd D:\qdrant
+.\qdrant.exe
+
+Qdrant sẽ chạy tại http://localhost:6333. 
+Mở browser vào http://localhost:6333/dashboard để kiểm tra.
