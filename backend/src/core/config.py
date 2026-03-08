@@ -38,6 +38,12 @@ class Settings(BaseSettings):
 
     # Frontend
     FRONTEND_URL: str = "http://localhost:3000"
+    
+    # LGSP
+    LGSP_BASE_URL: str = "http://localhost:8000"
+    LGSP_API_KEY: str = "dev-mock-key"
+    LGSP_WARD_CODE: str = "79280001"
+
 
     @property
     def is_dev(self) -> bool:
@@ -47,3 +53,4 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
+settings = get_settings()

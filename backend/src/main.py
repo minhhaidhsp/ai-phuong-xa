@@ -11,6 +11,8 @@ from src.api.agents import router as agents_router
 from src.rag.vector_store import init_collection
 from src.api.report import router as report_router
 from src.api.nhiem_vu import router as nhiem_vu_router
+from src.api.ragas import router as ragas_router
+from src.api.lgsp import router as lgsp_router, mock_router as lgsp_mock_router
 
 settings = get_settings()
 
@@ -47,6 +49,9 @@ app.include_router(rag_router)
 app.include_router(agents_router)
 app.include_router(report_router)
 app.include_router(nhiem_vu_router)
+app.include_router(ragas_router)
+app.include_router(lgsp_router)
+app.include_router(lgsp_mock_router)
 
 
 @app.get("/health")
