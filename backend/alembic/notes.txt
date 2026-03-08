@@ -2,6 +2,10 @@
 username: postgres
 pass: postgres123
 
+=========admin
+user: admin
+pass: Admin@123
+
 ===========Run BE
 cd D:\Projects\ai-phuong-xa\backend
 .\venv\Scripts\Activate.ps1

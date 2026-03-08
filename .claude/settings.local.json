@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit --project tsconfig.json)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(rm -f tiep_nhan_page.py fix_api2.py theo_doi_page.py load_real_data.py add_pagination.py upgrade_table.py fix_pagesize.py fix_bugs.py fix_theodoi_mapping.py fix_layout.py add_linhvuc_badge.py upgrade_table_v2.py check_patterns.py check2.py fix_row_v3.py fix_columns.py fix_table_final.py check_header.py read_file.py fix_grid_only.py fix_header_direct.py theo_doi_current.txt)",
+      "Bash(ls *.py *.txt)"
+    ]
+  }
+}

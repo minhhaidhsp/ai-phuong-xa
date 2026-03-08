@@ -80,6 +80,8 @@ class HoSoDetailResponse(BaseModel):
     cong_dan_email: Optional[str] = None
     can_bo_thu_ly_id: Optional[str] = None
     can_bo_ten: Optional[str] = None    # Tên cán bộ phụ trách
+    thu_tuc_ten: Optional[str] = None   # Tên thủ tục
+    linh_vuc: Optional[str] = None      # Lĩnh vực
     ngay_tiep_nhan: datetime
     han_giai_quyet: datetime
     ngay_hoan_thanh: Optional[datetime] = None
@@ -201,6 +203,8 @@ async def tiep_nhan_ho_so(
         cong_dan_email=ho_so.cong_dan_email,
         can_bo_thu_ly_id=ho_so.can_bo_thu_ly_id,
         can_bo_ten=ho_so.can_bo_thu_ly.ho_ten if ho_so.can_bo_thu_ly else None,
+        thu_tuc_ten=ho_so.thu_tuc.ten if ho_so.thu_tuc else None,
+        linh_vuc=ho_so.thu_tuc.linh_vuc if ho_so.thu_tuc else None,
         ngay_tiep_nhan=ho_so.ngay_tiep_nhan,
         han_giai_quyet=ho_so.han_giai_quyet,
         ngay_hoan_thanh=ho_so.ngay_hoan_thanh,
@@ -251,6 +255,8 @@ async def get_danh_sach(
                 cong_dan_email=hs.cong_dan_email,
                 can_bo_thu_ly_id=hs.can_bo_thu_ly_id,
                 can_bo_ten=hs.can_bo_thu_ly.ho_ten if hs.can_bo_thu_ly else None,
+                thu_tuc_ten=hs.thu_tuc.ten if hs.thu_tuc else None,
+                linh_vuc=hs.thu_tuc.linh_vuc if hs.thu_tuc else None,
                 ngay_tiep_nhan=hs.ngay_tiep_nhan,
                 han_giai_quyet=hs.han_giai_quyet,
                 ngay_hoan_thanh=hs.ngay_hoan_thanh,
@@ -290,6 +296,8 @@ async def get_chi_tiet(
         cong_dan_email=ho_so.cong_dan_email,
         can_bo_thu_ly_id=ho_so.can_bo_thu_ly_id,
         can_bo_ten=ho_so.can_bo_thu_ly.ho_ten if ho_so.can_bo_thu_ly else None,
+        thu_tuc_ten=ho_so.thu_tuc.ten if ho_so.thu_tuc else None,
+        linh_vuc=ho_so.thu_tuc.linh_vuc if ho_so.thu_tuc else None,
         ngay_tiep_nhan=ho_so.ngay_tiep_nhan,
         han_giai_quyet=ho_so.han_giai_quyet,
         ngay_hoan_thanh=ho_so.ngay_hoan_thanh,
@@ -360,6 +368,8 @@ async def cap_nhat_trang_thai(
         cong_dan_email=ho_so.cong_dan_email,
         can_bo_thu_ly_id=ho_so.can_bo_thu_ly_id,
         can_bo_ten=ho_so.can_bo_thu_ly.ho_ten if ho_so.can_bo_thu_ly else None,
+        thu_tuc_ten=ho_so.thu_tuc.ten if ho_so.thu_tuc else None,
+        linh_vuc=ho_so.thu_tuc.linh_vuc if ho_so.thu_tuc else None,
         ngay_tiep_nhan=ho_so.ngay_tiep_nhan,
         han_giai_quyet=ho_so.han_giai_quyet,
         ngay_hoan_thanh=ho_so.ngay_hoan_thanh,

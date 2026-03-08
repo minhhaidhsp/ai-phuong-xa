@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Plus Jakarta Sans',sans-serif; background:#eef2f7; color:#0c1e3c; font-size:13.5px; line-height:1.55; overflow:hidden; height:100vh; }
+}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(12,30,60,.15);border-radius:10px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.animate-fade-up{animation:fadeUp .18s ease}
+.animate-slide-in{animation:slideIn .2s ease}
